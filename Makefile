@@ -1,15 +1,12 @@
 
 NAME = so_long
 
-# BONUS = 
-
-SRC = handle_error.c so_long.c
-
-# SRC_BONUS = 
+SRC = handle_error.c map_read.c map_check.c so_long.c \
+		load_textures.c render_image.c dfs.c key_events.c
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 COMPILE = $(CC) $(CFLAGS)
 
@@ -25,13 +22,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C ./mlx
 	@make -C ./ft_printf
-	$(CC) $(SRC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit $(FT_PRINTF) $(MLX) -o $(NAME)
-
-# bonus:
-# 	@make -C ./mlx
-# 	@make -C ./ft_printf
-# 	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-# 	@$(COMPILE) $(SRC) $(FT_PRINTF) -o $(NAME)
+	@$(CC) $(SRC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit $(FT_PRINTF) $(MLX) -o $(NAME)
 
 clean:
 	@make clean -C ./mlx
@@ -43,7 +34,5 @@ fclean:	clean
 	@rm -f $(NAME) $(BONUS)
 
 re: fclean all
-
-# rebo: fclean all bonus
 
 .PHONY: all clean fclean re bonus rebo
